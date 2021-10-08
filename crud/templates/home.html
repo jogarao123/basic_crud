@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <title>Home</title>
+    </head>
+    <body>
+        <form method="POST" action="{{ url_for('home') }}">
+            <input type="text" name="title">
+            
+            <input type="submit" value="add">
+
+        </form>
+
+        
+        <h1>Books are</h1>
+        <table>
+            {% for book in books %}
+                <tr>
+                    <td>
+                    {{ book.title }}
+                    </td>
+                    <td>
+                        <form action="{{ url_for('update') }}" method="POST">
+                            <input type="hidden" value="{{ book.title }}" name="oldtitle">
+                            <input type="text" value="{{ book.title }}" name="newtitle">
+                            <input type="submit" value="update">
+                        </form>
+                    </td>    
+                    <td>
+                        <form action="{{ url_for('delete') }}"  method="POST">
+                            <input type="hidden" value="{{ book.title }}"" name="title">
+                            <input type="submit" value="delete">
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>
